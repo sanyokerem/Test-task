@@ -1,0 +1,8 @@
+<h1><?=isset(\App::$user['login']) ? ucfirst(\App::$user['login']). ' user page' : 'Main page' ?></h1>
+
+<?php if (\App::$user): ?>
+
+	<p><strong>User name: </strong><?=isset(\App::$user['real_name']) ? \App::$user['real_name'] : 'Undefined';?></p>
+	<p><strong>User e-mail: </strong><?=\App::$user['email']?></p>
+<?php endif ?>
+

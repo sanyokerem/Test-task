@@ -1,0 +1,40 @@
+<div>
+	<form action="" method="post">
+		<legend><h1>Register</h1></legend>
+		<div class="form-group">
+			<label for="email">E-mail:</label><br>
+			<input type="text" name="email" id="email" class="form-control" placeholder="E-mail" required pattern="^\w+@\w+(\.\w+)+$">
+		</div>
+		<div class="form-group">
+			<label for="login">Login:</label><br>
+			<input type="text" name="login" id="login" placeholder="Login" required pattern="^\w{2,}$">
+		</div>
+		<div class="form-group">
+			<label for="pass">Password:</label><br>
+			<input type="password" name="password" id="pass" placeholder="Password" pattern="^(?=.*\d)(?=.*[a-z])(?!.*\s).*$" required>
+		</div>
+		<div class="form-group">
+			<label for="name">Full name:</label><br>
+			<input type="text" name="real_name" id="name" placeholder="Full name"pattern="(\w+(\s)*)+$">
+		</div>
+		<div class="form-group">
+			<label for="birthday">Birthday:</label><br>
+			<input type="date" name="birthday" id="birthday">
+		</div>
+		<div class="form-group">
+			<label for="country">Choose your countrie:</label><br>
+			<select name="country" id="country">
+
+				<?php foreach ($vars['countries'] as $country): ?>
+					<option value=<?=$country['id']?>><?=$country['name']?></option>
+				<?php endforeach ?>
+
+			</select>
+		</div>
+			<p><input type="checkbox" name="agree" id="check" onclick="is_agree()">
+			Do you agree with terms and conditions?</p>
+
+			<input type="submit" value="Register" id="submit" disabled>
+
+	</form>
+</div>

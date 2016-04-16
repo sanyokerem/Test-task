@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+	<header class="menu">
+		<ul class="main-menue">
+			<li><a href="/">Home</a><br>
+			<?php if (\App::$user): ?>
+				<li><a href="/user/logout">Logout</a>
+			<?php else: ?>
+				<li><a href="/user/register">Register</a><br>
+				<li><a href="/user/login">Login</a>
+			<?php endif ?>
+		</ul>
+	</header>
+	
+	<div class='container'>
+		<?php if (isset($_SESSION['error'])): ?>
+			<div class="panel-danger"><strong>Error:</strong><?=$_SESSION['error']?></div>
+		<?php
+			unset($_SESSION['error']); 
+			endif 
+		?>
