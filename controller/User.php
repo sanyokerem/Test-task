@@ -41,7 +41,7 @@ class User{
 
 	public function login(){
 		if(isset($_SESSION['user'])){
-			$_SESSION['error'] = ' !You are already logged in';
+			$_SESSION['error'] = ' You are already logged in!';
 			Router::redirect();
 		}
 		$user = $this->convert_to_user('login');
@@ -51,7 +51,7 @@ class User{
 				$_SESSION['user']  = $user_info[0];
 				Router::redirect();
 			}else{
-				$_SESSION['error'] = ' Password or e-mail is incorrect!';
+				$_SESSION['error'] = ' Password or login is incorrect!';
 			}
 		}
 
