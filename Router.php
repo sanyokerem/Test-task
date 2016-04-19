@@ -5,35 +5,47 @@ class Router{
 	public static $url;
 	public function dispatch(){
 
+		$dir = $this->get_dir();
 		$url = $_SERVER['REQUEST_URI'];
 		$real_url = explode('?', $url)[0];
 		self::$url = $real_url;
 		switch (true) {
-			case preg_match('#^/home#', $real_url):
-			case preg_match('#^/$#', $real_url):
+			case preg_match('#^/'.$dir.'home$#', $real_url):
+			case preg_match('#^'.$dir.'$#', $real_url):
 				return ['Home', 'index'];
 				break;
 
-			case preg_match('#^/user#', $real_url):
-				$second_part = substr($real_url, 6);
-				switch($second_part){
-					case 'register':
-					case 'login':
-					case 'logout':
-						$action = $second_part;
-					break;
-					default:
-						$action = 'login';
-				}
-				return ['User', $action];
-			break;
+			case preg_match('#^'.$dir.'logout$#', $real_url):
+				return ['User', 'logout'];
+				break;
+
+			case preg_match('#^'.$dir.'login$#', $real_url):
+				return ['User', 'login'];
+				break;
+
+			case preg_match('#^'.$dir.'register$#', $real_url):
+				return ['User', 'register'];
+				break;
+			
 			default:
 				return ['Home', 'not_found'];
 				break;
 		}
 	}
 
-	public static function redirect($adress = '/'){
+	public static function get_dir($path='/'){
+		$script_path = array_slice(explode('/', $_SERVER['SCRIPT_NAME']), 1, -1);
+		if($script_path){
+			$dir = '/'.implode('/', $script_path).$path;
+		}else{
+			$dir = $path;
+		}
+		//$dir = $slash.implode('/', $script_path).$path;
+		return $dir;
+	}
+
+	public static function redirect(){
+		$adress = self::get_dir();
 		header("Location: {$adress}");
 		exit();
 	}
