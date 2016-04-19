@@ -40,7 +40,7 @@ class Router{
 		}else{
 			$dir = $path;
 		}
-		//$dir = $slash.implode('/', $script_path).$path;
+		
 		return $dir;
 	}
 
